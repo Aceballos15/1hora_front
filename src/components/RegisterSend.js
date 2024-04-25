@@ -174,7 +174,8 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
         if (verify) {
 
             const detailOrder = {
-                Direccion: data.direccion.value,  
+                Direccion: data.direccion.value, 
+                Ciudad: city_api
                 
             };
 
@@ -292,7 +293,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
 
             const detailOrder = {
                 Direccion: data.direccion.value,  
-                
+                Ciudad: city_api
             };
 
             setDataSend(detailOrder);
@@ -552,6 +553,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                     Clientes: idCliente,
                     Zona: zona_id !== '' ? zona_id.ID.toString() : "",
                     Direccion: dataSend.Direccion,
+                    Ciudad: dataSend.Ciudad,
                     Referencia: formWompi.reference,
                     Total: total,
                     Subtotal: subtotal,
@@ -728,7 +730,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                     <div className='block-form'>
                         <div>
 
-                            <select className='form-control' name='departamento' onChange={getCities} disabled={enableRegister ? false : true}>
+                            <select className='form-control' name='departamento' onChange={getCities}>
                                 <option value=''>Departamento *</option>
                                 { departaments && departaments.length !== 0 && (
                                     departaments.map( departament => {
@@ -743,7 +745,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                         </div>
                         
                         <div>
-                            <select className='form-control' name='ciudad' disabled={enableRegister ? false : true}>
+                            <select className='form-control' name='ciudad'>
                                 <option value=''>Ciudad *</option>
                                 { citiesDep && citiesDep.length !== 0 && (
                                     citiesDep.map( city => {
