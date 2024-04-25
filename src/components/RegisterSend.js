@@ -280,6 +280,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                 Cupo: 0,
                 Tipo: "Detal",
                 Dias: 0,
+                "Registro_externo": "Si",
                 location: {
                     country2: "Colombia ",
                     address_line_12: data.direccion.value,
