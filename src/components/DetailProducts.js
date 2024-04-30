@@ -53,7 +53,7 @@ export const DetailProducts = ({productsCart, productDetail = null,  setProducts
                             <div className="products__card-description">
                                 <span className="products__type">{productDetail && productDetail.GrupoDeProductos.Description}</span>
                                 <h3 className="products__title">{productDetail && productDetail.Referencia}</h3>
-                                <p className='products__description' dangerouslySetInnerHTML={productDetail ? {__html: productDetail.Caracteristicas.replace(/-/g, `<li/>` )}: {__html: ""} }></p>
+                                <p className='products__description' dangerouslySetInnerHTML={productDetail && productDetail.Caracteristicas ? {__html: productDetail.Caracteristicas.replace(/-/g, `<li/>` )}: {__html: ""} }></p>
                                 <div className="products__cont-price-cart">
                                     <div className="products__cont-price">
                                         {/* Cambiar para mas adelante el precio del producto */}

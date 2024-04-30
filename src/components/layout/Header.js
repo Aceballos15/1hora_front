@@ -35,7 +35,7 @@ const searchProducts = (e) => {
             listProducts.map( product => {
                 
                 let product_reference = product.Referencia.toLowerCase();
-                let product_characteristics = product.Caracteristicas.toLowerCase();
+                let product_characteristics = product.Caracteristicas ? product.Caracteristicas.toLowerCase() : '';
                 let product_category = product.GrupoDeProductos.Description.toLowerCase();
                 
                 if (product_reference.includes(search_product) || product_characteristics.includes(search_product) || product_category.includes(search_product)) {
