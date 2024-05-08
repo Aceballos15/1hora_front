@@ -537,7 +537,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                     let object = {
                             
                         Productos: product.ID,
-                        Preci: product.precio,
+                        Precio: product.precio,
                         Cantidad: product.quantity.length !== 0 ? product.quantity : 1,
                         IVA: product.precio * (parseInt(product.GrupoDeProductos.IVA1) /  100),
                         Orden_Id: "0",
