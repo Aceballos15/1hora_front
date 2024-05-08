@@ -2,9 +2,14 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
 
     //Mostrar cargando y ocultar el icono del carrito
     const item_add_product = e.target.id.length !== 0 ? e.target : e.target.parentNode;
-    item_add_product.children[0].classList.remove('display-none');
-    item_add_product.children[1].classList.add('display-none');
+    console.log(item_add_product);
 
+    await setTimeout( () => {
+        item_add_product.children[0].classList.remove('display-none');
+        item_add_product.children[1].classList.add('display-none');
+    }, 300);
+    
+    
     //Llamado de la API por su ID
     let URL_API = URL_BASE + '%26%26ID%3D' + id;
     let product_api = await fetch(URL_API);
