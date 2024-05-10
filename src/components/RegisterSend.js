@@ -19,6 +19,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
     const [idCliente, setIdCliente] = useState('');
     const [loadSuccess, setLoadSuccess] = useState(false);
     const [dataSend, setDataSend] = useState('');
+    const [dataInfo, setDataInfo] = useState('');
 
     const verifyUser = async(e) => {
        
@@ -179,6 +180,8 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                 
             };
 
+            setDataInfo(`ID cliente: ${idCliente}`);
+
             setDataSend(detailOrder);
 
             const cont_success = document.querySelector('#detail-success');
@@ -291,6 +294,9 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                 }
                 
             };
+
+            setDataInfo(`ID cliente: ${idCliente} -  N Documento: ${document_id} - Nombre: ${data.nombre.value} ${data.apellido.value}`);
+            //dataInfo(`ID cliente: ${idCliente}`);
 
             const detailOrder = {
                 Direccion: data.direccion.value,  
@@ -548,7 +554,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                 });           
     
                 
-                console.log(zona_id);
+                //console.log(zona_id);
                 const order_json = {
                     Fecha: dateNow(),
                     Aplicativo: "1hora",
@@ -563,10 +569,11 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                     Estado: "Pendiente",
                     Estado_De_Pago: "Pending",
                     Items: products,
+                    Info: dataInfo,
                     Fecha_de_pago: dateNow()
                 } 
     
-                console.log(order_json);
+                //console.log(order_json);
     
                 const config_json_order = {
                     method: 'POST',
