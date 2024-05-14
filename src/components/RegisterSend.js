@@ -20,6 +20,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
     const [loadSuccess, setLoadSuccess] = useState(false);
     const [dataSend, setDataSend] = useState('');
     const [dataInfo, setDataInfo] = useState('');
+    const [dataInfoJSON, setDataInfoJSON] = useState('');
 
     const verifyUser = async(e) => {
        
@@ -295,7 +296,8 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                 
             };
 
-            setDataInfo(`ID cliente: ${idCliente} -  N Documento: ${document_id} - Nombre: ${data.nombre.value} ${data.apellido.value}`);
+            setDataInfo(`N Documento: ${document_id} - Nombre: ${data.nombre.value} ${data.apellido.value}`);
+            setDataInfoJSON(JSON.stringify(newClient));
             //dataInfo(`ID cliente: ${idCliente}`);
 
             const detailOrder = {
@@ -570,6 +572,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                     Estado_De_Pago: "Pending",
                     Items: products,
                     Info: dataInfo,
+                    Info_JSON: dataInfoJSON,
                     Fecha_de_pago: dateNow()
                 } 
     
