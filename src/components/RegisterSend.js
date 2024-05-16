@@ -422,15 +422,15 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
 
         if ( name.length === 0 ) {
             errors.name = "El campo está vacío";
-        }else if(!verifyContentNumbers(name)) {
+        }/* else if(!verifyContentNumbers(name)) {
             errors.name = "El campo no puede contener numeros";
-        }
+        } */
 
         if ( last_name.length === 0 ) {
             errors.last_name = "El campo está vacío";
-        }else if(!verifyContentNumbers(last_name)) {
+        }/* else if(!verifyContentNumbers(last_name)) {
             errors.last_name = "El campo no puede contener numeros";
-        }
+        } */
 
         if (email.length === 0) {
             errors.email = "El campo está vacío";
