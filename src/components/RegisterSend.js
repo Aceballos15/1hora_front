@@ -549,7 +549,8 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                         Cantidad: product.quantity.length !== 0 ? product.quantity : 1,
                         IVA: product.precio * (parseInt(product.GrupoDeProductos.IVA1) /  100),
                         Orden_Id: "0",
-                        Estado: "Activo"
+                        Estado: "Activo",
+                        Estado_traslado: "Activo"
                     };
     
                     products.push(object);
@@ -569,6 +570,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                     Subtotal: subtotal,
                     Iva_Total: iva,
                     Estado: "Pendiente",
+                    Estado_traslado: "Pendiente",
                     Estado_De_Pago: "Pending",
                     Items: products,
                     Info: dataInfo,
