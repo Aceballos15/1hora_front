@@ -126,7 +126,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
     
                 setBlockOptions(true);
 
-                setError('');
+                setError('');       
 
                 
         
@@ -658,12 +658,18 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
             </div>
             <div className="cart__body-card">
                 <div className="cart__cont-total">
-                <p>IVA: <span className="text-bold"> {formatNumber(iva, true)} </span></p> 
+                    <p>IVA: <span className="text-bold"> {formatNumber(iva, true)} </span></p> 
                     <p>Subtotal: <span className="text-bold"> {formatNumber(subtotal, true)} </span></p> 
                     {/* <p>Costo de envío: <span className="text-bold"> $20.000 </span></p> */}
                     <p className="cart__total">Total:  <span>{formatNumber(total, true)} </span></p>
                 </div>
-
+                <div className='cart__cont-desc'>
+                    <p>Cupón de descuento </p>
+                    <form>
+                        <input name='coupon' placeholder='Ingresa tú cupón' className='form-control' />
+                        <input type='submit' value='Validar' className='btn btn-coupon'  /> 
+                    </form>
+                </div>
                 
                 {productsCart && productsCart.length !== 0 && (
                     <>

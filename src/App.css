@@ -165,6 +165,13 @@ img {
     color: var(--white);
 }
 
+.btn-coupon {
+    background-color: var(--blue);
+    color: #ffff;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+}
+
 .section {
     padding-bottom: 3rem;
 }
@@ -919,6 +926,23 @@ img {
     width: auto;
     margin: 1rem;
     margin-bottom: 0;
+    
+}
+
+.cart__cont-desc {
+   
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.cart__cont-desc form {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.cart__cont-desc .form-control {
+    width: auto;
     
 }
 
