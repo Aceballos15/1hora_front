@@ -3,7 +3,7 @@ import { formatNumber } from '../helpers/formatNumbers.js';
 import { Products } from './Products.js';
 import { addProductCart } from '../helpers/addProductsCart.js';
 
-export const ProductsCategory = ({category = '', productsCart, setProductsCart, setSubtotal, setTotal, products, setProducts, setIva, currentPage, setCurrentPage, setProductDetail}) => {
+export const ProductsCategory = ({ discountPurchase, setTotalDiscount, category = '', productsCart, setProductsCart, setSubtotal, setTotal, products, setProducts, setIva, currentPage, setCurrentPage, setProductDetail}) => {
     
     let URL_BASE = category !== '' ? "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Productos_1_hora?where=Marca.Marca%3D%221hora%22%26%26Tipo.Nombre%3D%22" + category + "%22" : "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Productos_1_hora?max=10&where=Marca.Marca%3D%221hora%22";
 
@@ -37,7 +37,7 @@ export const ProductsCategory = ({category = '', productsCart, setProductsCart, 
   //Agregar productos al carrito
     const addProduct = async(e,id) => {
 
-        addProductCart(e, id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva);
+        addProductCart(e, id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva, discountPurchase, setTotalDiscount);
     }
 
     const openProductDetail = (product) => {

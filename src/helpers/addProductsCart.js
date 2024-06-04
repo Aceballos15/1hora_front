@@ -1,4 +1,6 @@
-export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva) => {
+import { addDiscountPurchase } from "./addDiscountPurchase.js";
+
+export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva, discountPurchase, setTotalDiscount) => {
 
     //Mostrar cargando y ocultar el icono del carrito
     const item_add_product = e.target.id.length !== 0 ? e.target : e.target.parentNode;
@@ -71,8 +73,10 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
         alert.classList.remove('active');  
         progress.classList.remove('active');         
     }, 4000)
-
+ 
     setTotal(total);
     setSubtotal(subtotal);
     setIva(iva);
+
+    addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
 } 

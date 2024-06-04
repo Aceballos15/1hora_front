@@ -137,7 +137,8 @@ img {
    
 }
 
-.btn-blue:hover {
+.btn-blue:hover,
+.btn-coupon:hover {
     background-color: var(--dark-blue);
 }
 
@@ -171,6 +172,8 @@ img {
     padding: 0.5rem;
     margin-left: 0.5rem;
 }
+
+
 
 .section {
     padding-bottom: 3rem;
@@ -1137,6 +1140,21 @@ img {
 
 .page-link.disabled {
     
+}
+
+
+
+.text-coupon {
+    font-size: 0.8rem;
+}
+
+.icon-remove-coupon {
+    border: 1px solid #333;
+    display: inline-block;
+    padding: 0.05rem 0.3rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
 }
 
 /* ============ Responsive =========== */

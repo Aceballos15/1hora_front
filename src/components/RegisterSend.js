@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { formatNumber } from '../helpers/formatNumbers.js';
+import { addDiscountPurchase } from '../helpers/addDiscountPurchase.js';
 
-export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCart, setAlertSuccess, setBlockOptions}) => {
+export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscount, setTotalDiscount, iva, setTotal, total, subtotal, productsCart, setProductsCart, setAlertSuccess, setBlockOptions}) => {
 
     const URL_CLIENTS = "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Clientes_Report";
     const URL_CITIES = "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Municipio1";
@@ -21,6 +22,8 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
     const [dataSend, setDataSend] = useState('');
     const [dataInfo, setDataInfo] = useState('');
     const [dataInfoJSON, setDataInfoJSON] = useState('');
+
+    const discountCoupon = useRef();
 
     const verifyUser = async(e) => {
        
@@ -516,8 +519,63 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
 
     }
 
-   
+    const validateCoupon = async(e) => {
 
+        e.preventDefault();
+
+        let coupon_value = e.target.coupon.value;
+        let errors = {};
+
+        //Validaciones del campo
+        if (coupon_value.length === 0) {
+            errors.coupon = "El campo esta vacío";
+        } 
+
+        //API cupon
+        const URL = 'https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Cupones_descuentos_1hora_Report?where%20=Estado%3D%3D%22Activo%22'; 
+        const coupon_API = await fetch(URL);
+        const data = await coupon_API.json();
+
+        let coupon = '';
+
+        //Validar que si esté el cupón en el sistema
+        if (data !== null) {
+            coupon = data.filter( coupon => coupon.Codigo_Descuento === coupon_value  );
+        }else{
+            errors.coupon = "No hay cupones disponibles";
+        }
+
+        if (coupon !== null && coupon.length !== 0) {
+            
+            setDiscountPurchase(coupon[0]);
+
+            await addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
+
+            let discount_percentage = parseInt(coupon[0].Porcentaje) / 100;
+            let discount_total = discount_percentage * total;
+
+            discountCoupon.current.innerHTML = `-${formatNumber(discount_total, true)}`;
+        
+            console.log("Console");
+        }else{
+            errors.coupon = "Cupón no disponible";
+        }
+
+
+        setErrors(errors);
+
+    }
+
+    const removeCoupon = () => {
+       
+
+        setTotal( total + totalDiscount );
+
+        setTotalDiscount(null);
+        setDiscountPurchase(null);
+    }
+
+   
     useEffect( () => {
         
         //Enviar pedido a la base de datos
@@ -660,19 +718,23 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
                 <div className="cart__cont-total">
                     <p>IVA: <span className="text-bold"> {formatNumber(iva, true)} </span></p> 
                     <p>Subtotal: <span className="text-bold"> {formatNumber(subtotal, true)} </span></p> 
-                    {/* <p>Costo de envío: <span className="text-bold"> $20.000 </span></p> */}
+                    <p>Descuento: <span className="text-bold" ref={discountCoupon}> {totalDiscount && `-${formatNumber(totalDiscount, true)}`} </span></p>                    {/* <p>Costo de envío: <span className="text-bold"> $20.000 </span></p> */}
                     <p className="cart__total">Total:  <span>{formatNumber(total, true)} </span></p>
                 </div>
-                <div className='cart__cont-desc'>
-                    <p>Cupón de descuento </p>
-                    <form>
-                        <input name='coupon' placeholder='Ingresa tú cupón' className='form-control' />
-                        <input type='submit' value='Validar' className='btn btn-coupon'  /> 
-                    </form>
-                </div>
-                
                 {productsCart && productsCart.length !== 0 && (
                     <>
+                    <div className='cart__cont-desc'>
+                        <p>Cupón de descuento </p>
+                        <form onSubmit={validateCoupon}>
+                            <input name='coupon' placeholder='Ingresa tú cupón' className='form-control' />
+                            <input type='submit' value='Validar' className='btn btn-coupon' disabled={totalDiscount === null ? false : true} /> 
+                        </form>
+                        { errors && errors.coupon ? ( <span className='text-error'> { errors.coupon } </span> ) : '' }
+
+                        { discountPurchase !== null ? ( <p className='text-coupon'> {discountPurchase.Codigo_Descuento} <span className='icon-remove-coupon' onClick={removeCoupon}> X </span> </p> ) : "" }
+                    </div>
+                
+                
                     <div className="cart__data-user">
                         <p>Ingresa los siguientes datos para continuar</p>
                         <form onSubmit={verifyUser}>
@@ -688,7 +750,7 @@ export const RegisterSend = ({iva, total, subtotal, productsCart, setProductsCar
 
                                
                                 <input type="text" className="form-control" name='document_id' id='document_id' placeholder="Número de documento" max='11'/>
-                                  
+                                
                                 
                                 
                             </div>

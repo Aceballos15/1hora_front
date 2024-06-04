@@ -2,7 +2,7 @@ import React from 'react'
 import { formatNumber } from '../helpers/formatNumbers.js'
 import { addProductCart } from '../helpers/addProductsCart.js';
 
-export const DetailProducts = ({productsCart, productDetail = null,  setProductsCart, setSubtotal, setTotal, setIva}) => {
+export const DetailProducts = ({discountPurchase ,setTotalDiscount, productsCart, productDetail = null,  setProductsCart, setSubtotal, setTotal, setIva}) => {
 
     const URL_BASE = "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Productos_1_hora?where=Marca.Marca%3D%221hora%22";
     
@@ -26,7 +26,7 @@ export const DetailProducts = ({productsCart, productDetail = null,  setProducts
     //Agregar productos al carrito
     const addProduct = async(e,id) => {
 
-        addProductCart(e, id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva);
+        addProductCart(e, id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva, discountPurchase ,setTotalDiscount,);
     } 
     
   return (

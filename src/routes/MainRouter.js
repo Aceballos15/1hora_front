@@ -17,6 +17,8 @@ export const MainRouter = () => {
     const [iva, setIva] = useState("");
     const [subtotal, setSubtotal] = useState("");
     const [total, setTotal] = useState("");
+    const [totalDiscount, setTotalDiscount] = useState(null); 
+    const [discountPurchase, setDiscountPurchase] = useState(null);
 
     const [groupProducts, setGroupProducts] = useState([]);
     const [products, setProducts] = useState([]);
@@ -74,7 +76,7 @@ export const MainRouter = () => {
           <main>
               <Routes>
                   <Route path='/' element={<Products  groupProducts={groupProducts} setCurrentPage={setCurrentPage} />} >
-                        <Route path='/' element={<ProductsCategory productsCart={productsCart} setProductsCart={setProductsCart} setIva={setIva} setSubtotal={setSubtotal} setTotal={setTotal} search="true" products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} setProductDetail={setProductDetail}/>}/>
+                        <Route path='/' element={<ProductsCategory discountPurchase={discountPurchase} setTotalDiscount={setTotalDiscount} productsCart={productsCart} setProductsCart={setProductsCart} setIva={setIva} setSubtotal={setSubtotal} setTotal={setTotal} search="true" products={products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} setProductDetail={setProductDetail}/>}/>
                         { groupProducts && groupProducts.length !== 0 && (
                             groupProducts.map( group => {
                                 let new_products = [];
@@ -87,7 +89,7 @@ export const MainRouter = () => {
 
                                 return (
                                     <>
-                                        <Route path={group} element={<ProductsCategory category={group} productsCart={productsCart} setProductsCart={setProductsCart} setIva={setIva} setSubtotal={setSubtotal} setTotal={setTotal}  products={new_products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} setProductDetail={setProductDetail}/>} />
+                                        <Route path={group} element={<ProductsCategory discountPurchase={discountPurchase} setTotalDiscount={setTotalDiscount} category={group} productsCart={productsCart} setProductsCart={setProductsCart} setIva={setIva} setSubtotal={setSubtotal} setTotal={setTotal}  products={new_products} setProducts={setProducts} currentPage={currentPage} setCurrentPage={setCurrentPage} setProductDetail={setProductDetail}/>} />
                                     </>
                                 )
                             } )
@@ -97,8 +99,8 @@ export const MainRouter = () => {
           </main>
 
           <Footer />
-          <Cart productsCart={productsCart} setProductsCart={setProductsCart} iva={iva} setIva={setIva} subtotal={subtotal} setSubtotal={setSubtotal} total={total} setTotal={setTotal} />
-          <DetailProducts productsCart={productsCart} productDetail={productDetail} setProductsCart={setProductsCart} setIva={setIva} setSubtotal={setSubtotal} setTotal={setTotal}/>
+          <Cart discountPurchase={discountPurchase} setDiscountPurchase={setDiscountPurchase} totalDiscount={totalDiscount} setTotalDiscount={setTotalDiscount} productsCart={productsCart} setProductsCart={setProductsCart} iva={iva} setIva={setIva} subtotal={subtotal} setSubtotal={setSubtotal} total={total} setTotal={setTotal} />
+          <DetailProducts discountPurchase={discountPurchase} setTotalDiscount={setTotalDiscount} productsCart={productsCart} productDetail={productDetail} setProductsCart={setProductsCart} setIva={setIva} setSubtotal={setSubtotal} setTotal={setTotal}/>
 
       </BrowserRouter>
   

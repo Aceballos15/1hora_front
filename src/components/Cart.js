@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { formatNumber } from '../helpers/formatNumbers.js';
 import { RegisterSend } from './RegisterSend.js';
+import { addDiscountPurchase } from '../helpers/addDiscountPurchase.js';
 
-export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, setSubtotal, total, setTotal}) => {
+export const Cart = ({discountPurchase, setDiscountPurchase, setTotalDiscount, totalDiscount, productsCart, setProductsCart, iva, setIva, subtotal, setSubtotal, total, setTotal}) => {
     // const [listCart, setListCart] = useState([]);
 
-    
 
     const [clients, setClients] = useState([]);
     const [alertSuccess, setAlertSuccess] = useState('');
     const [blockOptions, setBlockOptions] = useState(false);
+   
 
     const closeCart = () => {
         const cart = document.querySelector("#cart");
@@ -55,6 +56,8 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
         setTotal(total);
         setSubtotal(subtotal);
         setIva(iva);
+
+        addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
            
     }
 
@@ -93,6 +96,7 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
         setProductsCart(new_products_cart);
         localStorage.setItem('product', JSON.stringify(new_products_cart));
        
+        addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
 
     }
 
@@ -123,6 +127,8 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
         setIva(iva);
         setProductsCart(new_products_cart);
         localStorage.setItem('product', JSON.stringify(new_products_cart));
+
+        addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
     }
 
     const modifyQuantity = (e, id) => {
@@ -157,6 +163,7 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
             total += product.precio;
             iva += iva_decimal * product.precio;
             return product.ID !== null;
+            
 
         });
 
@@ -168,6 +175,7 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
         setProductsCart(new_products_cart);
         localStorage.setItem('product', JSON.stringify(new_products_cart));
 
+        addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
     }
 
     
@@ -213,6 +221,8 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
         setTotal(total);
         setIva(iva);
         //getClientsAPI();
+
+        addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
     }, []);
 
 
@@ -287,7 +297,8 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
 
                                         )
                                     })
-                                ) : ( 
+                                ) : (
+                                    
                                     <tr>
                                         <td colspan="4" className='text-center'>El carrito esta vacío</td>
                                     </tr> 
@@ -352,7 +363,7 @@ export const Cart = ({ productsCart, setProductsCart, iva, setIva, subtotal, set
                     </div>
                     
                     <div className="col col-33 col-mb-100 position-relative">
-                        <RegisterSend iva={iva} total={total} subtotal={subtotal} productsCart={productsCart} setProductsCart={setProductsCart} setAlertSuccess={setAlertSuccess} setBlockOptions={setBlockOptions}/>
+                        <RegisterSend setTotalDiscount={setTotalDiscount} totalDiscount={totalDiscount} discountPurchase={discountPurchase} setDiscountPurchase={setDiscountPurchase} iva={iva} setTotal={setTotal} total={total} subtotal={subtotal} productsCart={productsCart} setProductsCart={setProductsCart} setAlertSuccess={setAlertSuccess} setBlockOptions={setBlockOptions}/>
                     </div>
                 </div>
 
