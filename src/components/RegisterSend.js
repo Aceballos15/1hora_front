@@ -549,12 +549,15 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
             
             setDiscountPurchase(coupon[0]);
 
-            await addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
-
-            let discount_percentage = parseInt(coupon[0].Porcentaje) / 100;
-            let discount_total = discount_percentage * total;
-
-            discountCoupon.current.innerHTML = `-${formatNumber(discount_total, true)}`;
+            //Se utilizar la funcion por cambio no instantaneo
+            if (coupon[0] !== null) {
+                let discount_percentage = parseInt(coupon[0].Porcentaje) / 100;
+                let new_total = total - (total * discount_percentage);
+                let discount_total = total * discount_percentage;
+        
+                setTotal(new_total);
+                setTotalDiscount(discount_total);    
+           }
         
             console.log("Console");
         }else{
@@ -624,6 +627,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                     Direccion: dataSend.Direccion,
                     Ciudad: dataSend.Ciudad,
                     Referencia: formWompi.reference,
+                    Cupon_descuento: discountPurchase !== null ? discountPurchase.ID : '',
                     Total: total,
                     Subtotal: subtotal,
                     Iva_Total: iva,
@@ -718,7 +722,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                 <div className="cart__cont-total">
                     <p>IVA: <span className="text-bold"> {formatNumber(iva, true)} </span></p> 
                     <p>Subtotal: <span className="text-bold"> {formatNumber(subtotal, true)} </span></p> 
-                    <p>Descuento: <span className="text-bold" ref={discountCoupon}> {totalDiscount && `-${formatNumber(totalDiscount, true)}`} </span></p>                    {/* <p>Costo de envío: <span className="text-bold"> $20.000 </span></p> */}
+                    <p>Descuento: <span className="text-bold" id='element-discount'> {totalDiscount && `-${formatNumber(totalDiscount, true)}`} </span></p>                    {/* <p>Costo de envío: <span className="text-bold"> $20.000 </span></p> */}
                     <p className="cart__total">Total:  <span>{formatNumber(total, true)} </span></p>
                 </div>
                 {productsCart && productsCart.length !== 0 && (
@@ -731,7 +735,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                         </form>
                         { errors && errors.coupon ? ( <span className='text-error'> { errors.coupon } </span> ) : '' }
 
-                        { discountPurchase !== null ? ( <p className='text-coupon'> {discountPurchase.Codigo_Descuento} <span className='icon-remove-coupon' onClick={removeCoupon}> X </span> </p> ) : "" }
+                        { discountPurchase !== null ? ( <p className='text-coupon'> {discountPurchase.Codigo_Descuento} - {parseInt(discountPurchase.Porcentaje)}% <span className='icon-remove-coupon' onClick={removeCoupon}> X </span> </p> ) : "" }
                     </div>
                 
                 
