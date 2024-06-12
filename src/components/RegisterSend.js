@@ -4,8 +4,8 @@ import { addDiscountPurchase } from '../helpers/addDiscountPurchase.js';
 
 export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscount, setTotalDiscount, iva, setTotal, total, subtotal, productsCart, setProductsCart, setAlertSuccess, setBlockOptions}) => {
 
-    const URL_CLIENTS = "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Clientes_Report";
-    const URL_CITIES = "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Municipio1";
+    const URL_CLIENTS = "https://zoho.accsolutions.tech/API/v1/Clientes_Report";
+    const URL_CITIES = "https://zoho.accsolutions.tech/API/v1/Municipio1";
 
     //const [clients, setClients] = useState([]);
 
@@ -60,17 +60,19 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
         load.classList.add('show');
         await fetch(URL_CLIENTS + `?where=Documento%3D%3D%22${id}%22`)
         .then(response => response.json())
-        .then(data => {
+        .then(({data}) => {
 
                 let client_exists = '';
-                
+                console.log(data);
                 if (data.length !== undefined) {
+                    
                     data.map(client => {
                         if (client.Documento === id) {
                             exist = true;
                             setDataUser(client);
                             client_exists = client;
                             setIdCliente(client.ID);
+                            
                         }   
                     });
                 }
@@ -334,7 +336,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                 
             }, 300);
     
-            await fetch('https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Clientes', config)
+            await fetch('https://zoho.accsolutions.tech/API/v1/Clientes', config)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Datos registrados correctamente:', data);
@@ -532,9 +534,9 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
         } 
 
         //API cupon
-        const URL = 'https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Cupones_descuentos_1hora_Report?where%20=Estado%3D%3D%22Activo%22'; 
+        const URL = 'https://zoho.accsolutions.tech/API/v1/Cupones_descuentos_1hora_Report?where%20=Estado%3D%3D%22Activo%22'; 
         const coupon_API = await fetch(URL);
-        const data = await coupon_API.json();
+        const {data} = await coupon_API.json();
 
         let coupon = '';
 
@@ -584,10 +586,13 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
         //Enviar pedido a la base de datos
         if ( formWompi && formWompi.length !== 0) {
        
-            const URL_REMISION = `https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Remision_Report?where=Cliente%3D%3D${idCliente}`;
+            const URL_REMISION = `https://zoho.accsolutions.tech/API/v1/Remision_Report?where=Cliente%3D%3D${idCliente}`;
+
+            
+
             fetch(URL_REMISION)
             .then(res => res.json())
-            .then(data => {
+            .then(({data}) => {
     
                 let zona_id = '';
 
@@ -650,7 +655,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                     body: JSON.stringify(order_json)
                 };
     
-                const URl_ORDERS = 'https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Ordenes_1hora_Admin';
+                const URl_ORDERS = 'https://zoho.accsolutions.tech/API/v1/Ordenes_1hora_Admin';
                     
                 fetch(URl_ORDERS, config_json_order)
                 .then(response => response.json())
@@ -681,11 +686,11 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
             const cities_api = await fetch(URL_CITIES);
 
             const cities_data = await cities_api.json();
-            setCities(cities_data);
+            setCities(cities_data.data);
 
             let list_departaments = [];
           
-            cities_data.map(city => {
+            cities_data.data.map(city => {
 
                 /* let object = {
                     id: city.Codigo_Deapartamento,

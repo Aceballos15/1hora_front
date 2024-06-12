@@ -5,7 +5,7 @@ import { addProductCart } from '../helpers/addProductsCart.js';
 
 export const ProductsCategory = ({ discountPurchase, setTotalDiscount, category = '', productsCart, setProductsCart, setSubtotal, setTotal, products, setProducts, setIva, currentPage, setCurrentPage, setProductDetail}) => {
     
-    let URL_BASE = category !== '' ? "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Productos_1_hora?where=Marca.Marca%3D%221hora%22%26%26Tipo.Nombre%3D%22" + category + "%22" : "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Productos_1_hora?max=10&where=Marca.Marca%3D%221hora%22";
+    let URL_BASE = category !== '' ? "https://zoho.accsolutions.tech/API/v1/Productos_1_hora?where=Marca.Marca%3D%221hora%22%26%26Tipo.Nombre%3D%22" + category + "%22" : "https://zoho.accsolutions.tech/API/v1/Productos_1_hora";
 
     
      
@@ -19,7 +19,7 @@ export const ProductsCategory = ({ discountPurchase, setTotalDiscount, category 
     //Paginación
     for (let i = 1; i <= Math.ceil(total_products / productsForPage); i++) {
        pageNumbers.push(i);
-        
+         
     }
 
     const onPreviusPage = () => {

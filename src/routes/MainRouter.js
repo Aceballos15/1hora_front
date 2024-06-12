@@ -11,7 +11,7 @@ import { DetailProducts } from '../components/DetailProducts.js'
 export const MainRouter = () => {   
 
     //const URL_BASE_GROUP = "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/GrupoDeProductos_Report?where=ID%3D1889220000051935384";
-    const URL_BASE = "https://nexyapp-f3a65a020e2a.herokuapp.com/zoho/v1/console/Productos_1_hora?where=Marca.Marca%3D%221hora%22";
+    const URL_BASE = "https://zoho.accsolutions.tech/API/v1/Productos_1_hora?where=Marca.Marca%3D%221hora%22";
 
     const [productsCart, setProductsCart] = useState(null);
     const [iva, setIva] = useState("");
@@ -39,7 +39,7 @@ export const MainRouter = () => {
             const group_products_data = await group_products_api.json();
 
             let categories = [];
-            group_products_data.map(group => {
+            group_products_data.data.map(group => {
                 categories.push(group.Tipo.Nombre);
             });
 
@@ -60,7 +60,7 @@ export const MainRouter = () => {
 
             const products_data = await products_api.json();
             
-            setProducts(await products_data);    
+            setProducts(await products_data.data);    
         }
 
         getProductsAPI();

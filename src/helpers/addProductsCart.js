@@ -13,19 +13,20 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
     
     
     //Llamado de la API por su ID
-    let URL_API = URL_BASE + '%26%26ID%3D' + id;
+    let URL_API = URL_BASE + '?where=ID=' + id;
     let product_api = await fetch(URL_API);
-    let product_data = await product_api.json();
+    let {data} = await product_api.json();
 
     let total = 0;
     let subtotal = 0;
     let iva = 0;
+
     
 //Lista de productos en carrito en el localstorage
     let listCart = JSON.parse(localStorage.getItem('product'));
 
-    product_data[0].quantity = 1;
-    product_data[0].precio = parseInt(product_data[0].Precio_Mayorista);
+    data[0].quantity = 1;
+    data[0].precio = parseInt(data[0].Precio_Mayorista);
 
      //  Verifica e inserta si el listado de productos en el carrito ya existe
     if (Array.isArray(listCart)) {
@@ -35,7 +36,7 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
 
         if (!search_product) {
 
-            listCart.push(product_data[0]);
+            listCart.push(data[0]);
 
             localStorage.setItem('product', JSON.stringify(listCart));
             setProductsCart(listCart);
@@ -52,14 +53,14 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
 
 
     }else{
-        localStorage.setItem('product', JSON.stringify([product_data[0]]));
-        setProductsCart([product_data[0]]);
+        localStorage.setItem('product', JSON.stringify([data[0]]));
+        setProductsCart([data]);
 
-        let iva_decimal = parseInt(product_data[0].GrupoDeProductos.IVA1) / 100;
+        let iva_decimal = parseInt(data.GrupoDeProductos.IVA1) / 100;
 
-        subtotal += product_data[0].precio - (iva_decimal * product_data[0].precio);
-        total += product_data[0].precio;
-        iva += iva_decimal * product_data[0].precio;
+        subtotal += data.precio - (iva_decimal * data.precio);
+        total += data.precio;
+        iva += iva_decimal * data.precio;
 
     }
 
