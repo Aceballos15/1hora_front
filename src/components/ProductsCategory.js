@@ -7,7 +7,7 @@ export const ProductsCategory = ({ discountPurchase, setTotalDiscount, category 
     
     let URL_BASE = category !== '' ? "https://zoho.accsolutions.tech/API/v1/Productos_1_hora?where=Marca.Marca%3D%221hora%22%26%26Tipo.Nombre%3D%22" + category + "%22" : "https://zoho.accsolutions.tech/API/v1/Productos_1_hora";
 
-    
+    let URL_BASE_API = "https://zoho.accsolutions.tech/API/v1/Productos_1_hora";
      
     const total_products = products.length;
     const [productsForPage, setProductsForPage] = useState(12);
@@ -37,7 +37,7 @@ export const ProductsCategory = ({ discountPurchase, setTotalDiscount, category 
   //Agregar productos al carrito
     const addProduct = async(e,id) => {
 
-        addProductCart(e, id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva, discountPurchase, setTotalDiscount);
+        addProductCart(e, id, URL_BASE_API, setProductsCart, setTotal, setSubtotal, setIva, discountPurchase, setTotalDiscount);
     }
 
     const openProductDetail = (product) => {
