@@ -54,13 +54,13 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
 
     }else{
         localStorage.setItem('product', JSON.stringify([data[0]]));
-        setProductsCart([data]);
+        setProductsCart([data[0]]);
 
-        let iva_decimal = parseInt(data.GrupoDeProductos.IVA1) / 100;
+        let iva_decimal = parseInt(data[0].GrupoDeProductos.IVA1) / 100;
 
-        subtotal += data.precio - (iva_decimal * data.precio);
-        total += data.precio;
-        iva += iva_decimal * data.precio;
+        subtotal += data[0].precio - (iva_decimal * data[0].precio);
+        total += data[0].precio;
+        iva += iva_decimal * data[0].precio;
 
     }
 

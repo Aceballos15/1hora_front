@@ -265,7 +265,7 @@ export const Cart = ({discountPurchase, setDiscountPurchase, setTotalDiscount, t
                                             <tr key={product.id} id={product.ID}>
                                                 <td className="cart__data" >
                                                     <div className="cart__img">
-                                                        <img src={product.Imagen_publica.url} alt=""/>
+                                                        <img src={product.Imagen_publica.url } alt=""/>
                                                     </div>
                                                     <div className="cart__information">
                                                         <span className="cart__name-product">{product.Referencia}</span>
