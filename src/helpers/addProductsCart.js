@@ -6,16 +6,14 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
     const item_add_product = e.target.id.length !== 0 ? e.target : e.target.parentNode;
     console.log(item_add_product);
 
-    await setTimeout( () => {
-        try {
-            item_add_product.children[0].classList.remove('display-none');
-            item_add_product.children[1].classList.add('display-none');
-            
-        } catch (error) {
-            console.log(`Error con unas de la propiedades de carga de los iconos en el boton de agregar un producto - Error: ${error.Message}`);
-        }
-    }, 300);
-    
+    try {
+        item_add_product.children[0].classList.remove('display-none');
+        item_add_product.children[1].classList.add('display-none');
+        
+    } catch (error) {
+        console.log(`Error con unas de la propiedades de carga de los iconos en el boton de agregar un producto - Error: ${error.message}`);
+    }
+ 
     
     //Llamado de la API por su ID
     let URL_API = URL_BASE + '?where=ID=' + id;

@@ -24,7 +24,7 @@ export const Footer = () => {
             </div>
         </div>
         <div className="footer__text">
-            <span>&copy; 2024 CHACAM TRADING</span>
+            <span>Copyright &copy; {new Date().getFullYear()} Tecnosuper - 1Hora. Desarrollado por <b>Asinfy</b>.</span>
         </div>
     </footer>
     <div className='load load-display'> 
