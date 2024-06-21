@@ -13,17 +13,18 @@ export const Footer = () => {
                 </div>
             </div>
         </div>
-        <div className="footer__text">
-            <span>&copy; 2024 CHACAM TRADING</span>
-        </div>
+       
         <div className="footer__logos">
             <div className="footer__img-logo">
-                <img src="./img/Logo-chacam.svg" alt="" />
+                <img src="./img/Logo-asinfy.svg" alt="" />
             </div>
 
             <div className="footer__img-logo">
                 <img src="./img/Logo_1Hora 1 blanco.png" alt=""/>
             </div>
+        </div>
+        <div className="footer__text">
+            <span>&copy; 2024 CHACAM TRADING</span>
         </div>
     </footer>
     <div className='load load-display'> 

@@ -101,11 +101,11 @@ return (
                 </div>
                 <div className='header-mb'>
                     <nav className="header__nav">
+                        
+                        <input type="search" placeholder="Filtrar por producto" id="search-product" onChange={(e) => searchProducts(e)} />
                         <button className="btn btn-search">
                             <img src="./img/search.png" alt="" />
                         </button>
-                        <input type="search" placeholder="Filtrar por producto" id="search-product" onChange={(e) => searchProducts(e)} />
-                        
                     </nav>
                 </div>
             

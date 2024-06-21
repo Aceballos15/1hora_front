@@ -25,7 +25,7 @@ export const DetailProducts = ({discountPurchase ,setTotalDiscount, productsCart
     //Agregar productos al carrito
     const addProduct = async(e,id) => {
 
-        addProductCart(e, id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva, discountPurchase ,setTotalDiscount,);
+        addProductCart(e, id, URL_BASE, setProductsCart, setTotal, setSubtotal, setIva, discountPurchase ,setTotalDiscount);
     } 
     
   return (

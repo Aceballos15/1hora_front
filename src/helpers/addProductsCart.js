@@ -7,8 +7,13 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
     console.log(item_add_product);
 
     await setTimeout( () => {
-        item_add_product.children[0].classList.remove('display-none');
-        item_add_product.children[1].classList.add('display-none');
+        try {
+            item_add_product.children[0].classList.remove('display-none');
+            item_add_product.children[1].classList.add('display-none');
+            
+        } catch (error) {
+            console.log(`Error con unas de la propiedades de carga de los iconos en el boton de agregar un producto - Error: ${error.Message}`);
+        }
     }, 300);
     
     
