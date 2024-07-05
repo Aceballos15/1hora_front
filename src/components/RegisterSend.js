@@ -341,6 +341,8 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                 .then(data => {
                     console.log('Datos registrados correctamente:', data);
                     setIdCliente(data.ID);
+
+                    console.log(idCliente);
                 })
                 .catch(error => {
                     console.error('Los datos no se registraron:', error.message);
