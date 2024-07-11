@@ -535,18 +535,23 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
             errors.coupon = "El campo esta vacío";
         } 
 
-        //API cupon
-        const URL = 'https://zoho.accsolutions.tech/API/v1/Cupones_descuentos_1hora_Report?where%20=Estado%3D%3D%22Activo%22'; 
-        const coupon_API = await fetch(URL);
-        const {data} = await coupon_API.json();
-
         let coupon = '';
 
-        //Validar que si esté el cupón en el sistema
-        if (data !== null) {
-            coupon = data.filter( coupon => coupon.Codigo_Descuento === coupon_value && coupon.Estado === "Activo" );
-        }else{
-            errors.coupon = "No hay cupones disponibles";
+        try {
+            //API cupon
+            const URL = 'https://zoho.accsolutions.tech/API/v1/Cupones_descuentos_1hora_Report?where%20=Estado%3D%3D%22Activo%22'; 
+            const coupon_API = await fetch(URL);
+            const {data} = await coupon_API.json();
+    
+            //Validar que si esté el cupón en el sistema
+            if (data !== null) {
+                coupon = data.filter( coupon => coupon.Codigo_Descuento === coupon_value && coupon.Estado === "Activo" );
+            }else{
+                errors.coupon = "No hay cupones disponibles";
+            }
+            
+        } catch (error) {
+            console.log("No se pudo encontrar el cupon - Error:" + error.message);
         }
 
         if (coupon !== null && coupon.length !== 0) {
