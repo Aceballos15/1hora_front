@@ -56,12 +56,17 @@ useEffect( () => {
 
     const getProductsAPI = async() => {
 
-        const URL_BASE = "https://zoho.accsolutions.tech/API/v1/Productos_1_hora?where=Marca.Marca%3D%221hora%22";
-        const products_api = await fetch(URL_BASE);
-        const {data} = await products_api.json();
-        
-        setProducts(await data);
-        setListProducts(await data);
+        try {
+            const URL_BASE = "https://zoho.accsolutions.tech/API/v1/Productos_1_hora?where=Marca.Marca%3D%221hora%22";
+            const products_api = await fetch(URL_BASE);
+            const {data} = await products_api.json();
+            
+            setProducts(await data);
+            setListProducts(await data);
+            
+        } catch (error) {
+           console.log(`Error al traer los productos - Error: ${error.message}`); 
+        }
     
     }
 

@@ -678,6 +678,8 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                 });
     
     
+            }).catch( error => {
+                console.log(`Error al realizar el pedido - Error: ${error.message}`); 
             });
     
                 
@@ -690,30 +692,36 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
 
     useEffect( () => {
         const getDepartaments= async() => {
-            const cities_api = await fetch(URL_CITIES);
-
-            const cities_data = await cities_api.json();
-            setCities(cities_data.data);
-
-            let list_departaments = [];
-          
-            cities_data.data.map(city => {
-
-                /* let object = {
-                    id: city.Codigo_Deapartamento,
-                    nombre:city.Departamento
-
-                } */
-
-                list_departaments.push({id:city.Codigo_Deapartamento, nombre:city.Departamento});
-                //list_cities.push(city.Departamento);
+            try {
+                const cities_api = await fetch(URL_CITIES);
+    
+                const cities_data = await cities_api.json();
+                setCities(cities_data.data);
+    
+                let list_departaments = [];
+              
+                cities_data.data.map(city => {
+    
+                    /* let object = {
+                        id: city.Codigo_Deapartamento,
+                        nombre:city.Departamento
+    
+                    } */
+    
+                    list_departaments.push({id:city.Codigo_Deapartamento, nombre:city.Departamento});
+                    //list_cities.push(city.Departamento);
+                    
+                });
+    
+                let list = new Set(list_departaments.map(item => JSON.stringify(item)));
+                let new_list_departaments = Array.from(list).map(item => JSON.parse(item));
+    
+                setDepartaments(new_list_departaments);
                 
-            });
+            } catch (error) {
+                console.log(`Error al traer las ciudades - Error: ${error.message}`); 
 
-            let list = new Set(list_departaments.map(item => JSON.stringify(item)));
-            let new_list_departaments = Array.from(list).map(item => JSON.parse(item));
-
-            setDepartaments(new_list_departaments);
+            }
         };
 
         getDepartaments();
