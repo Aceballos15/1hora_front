@@ -54,8 +54,8 @@ export const Cart = ({discountPurchase, setDiscountPurchase, setTotalDiscount, t
   
 
         setTotal(total);
-        setSubtotal(subtotal);
-        setIva(iva);
+        setSubtotal(parseInt(subtotal));
+        setIva(parseInt(iva));
 
         addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
            
@@ -90,9 +90,9 @@ export const Cart = ({discountPurchase, setDiscountPurchase, setTotalDiscount, t
        });
 
 
-       setSubtotal(subtotal);
        setTotal(total);
-       setIva(iva);
+       setSubtotal(parseInt(subtotal));
+       setIva(parseInt(iva));
         setProductsCart(new_products_cart);
         localStorage.setItem('product', JSON.stringify(new_products_cart));
        
@@ -122,9 +122,9 @@ export const Cart = ({discountPurchase, setDiscountPurchase, setTotalDiscount, t
         return product.ID !== null;
        });
         
-        setSubtotal(subtotal);
-        setTotal(total);
-        setIva(iva);
+       setTotal(total);
+       setSubtotal(parseInt(subtotal));
+       setIva(parseInt(iva));
         setProductsCart(new_products_cart);
         localStorage.setItem('product', JSON.stringify(new_products_cart));
 
@@ -169,9 +169,9 @@ export const Cart = ({discountPurchase, setDiscountPurchase, setTotalDiscount, t
 
         
 
-        setSubtotal(subtotal);
-       setTotal(total);
-       setIva(iva);
+        setTotal(total);
+        setSubtotal(parseInt(subtotal));
+        setIva(parseInt(iva));
         setProductsCart(new_products_cart);
         localStorage.setItem('product', JSON.stringify(new_products_cart));
 
@@ -217,9 +217,9 @@ export const Cart = ({discountPurchase, setDiscountPurchase, setTotalDiscount, t
             iva += iva_decimal * product.precio; 
         });
         
-        setSubtotal(subtotal);
         setTotal(total);
-        setIva(iva);
+        setSubtotal(parseInt(subtotal));
+        setIva(parseInt(iva));
         //getClientsAPI();
 
         addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);

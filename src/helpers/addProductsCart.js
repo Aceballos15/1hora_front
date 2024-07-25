@@ -80,8 +80,8 @@ export const addProductCart = async(e,id, URL_BASE, setProductsCart, setTotal, s
         }, 4000)
      
         setTotal(total);
-        setSubtotal(subtotal);
-        setIva(iva);
+        setSubtotal(parseInt(subtotal));
+        setIva(parseInt(iva));
     
         addDiscountPurchase(total, discountPurchase, setTotal, setTotalDiscount);
         

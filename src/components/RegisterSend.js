@@ -620,7 +620,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                         Productos: product.ID,
                         Precio: product.precio,
                         Cantidad: product.quantity.length !== 0 ? product.quantity : 1,
-                        IVA: product.precio * (parseInt(product.GrupoDeProductos.IVA1) /  100),
+                        IVA: parseInt(product.precio * (parseInt(product.GrupoDeProductos.IVA1) /  100)),
                         Orden_Id: "0",
                         Estado: "Activo",
                         Estado_traslado: "Activo"
@@ -670,11 +670,11 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                     console.log(data);
     
                     setLoadSuccess(true);
-                    localStorage.removeItem('product');
+                   // localStorage.removeItem('product');
     
-                    setTimeout( () => {
+                   /*  setTimeout( () => {
                         window.location.reload();
-                    },3000);
+                    },3000); */
                 });
     
     
