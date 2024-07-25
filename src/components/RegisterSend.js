@@ -670,11 +670,11 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                     console.log(data);
     
                     setLoadSuccess(true);
-                   // localStorage.removeItem('product');
+                   localStorage.removeItem('product');
     
-                   /*  setTimeout( () => {
+                    setTimeout( () => {
                         window.location.reload();
-                    },3000); */
+                    },3000);
                 });
     
     
