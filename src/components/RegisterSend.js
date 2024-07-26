@@ -612,7 +612,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
 
             let registro = 0; 
                 
-            let factura = Array.isArray(data) 
+            let factura = Array.isArray(data) && data.length !== 0
                         ? data.reduce( (max, factura) => parseInt(factura.DocumentoNumero) > parseInt(max.DocumentoNumero) ? factura : max, data[0])
                          : null;
 
