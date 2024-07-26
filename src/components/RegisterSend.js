@@ -49,7 +49,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
             errorMessage = 'Campo vacío, ingresa el tipo de documento';
            
         }
-
+ 
         if (id.length > 11) {
             errorMessage = 'El campo no puede tener más de 11 dígitos';
             console.log("mayor");
@@ -603,15 +603,12 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
     
                 let zona_id = '';
 
-
-             let zona = Array.isArray(data) ? data.filter( zona => {
-    
-                    zona_id = zona.Zona;
-    
-                    return zona !== null;
-                }) : null;  /* parseInt(data[0].Zona.ID); */
-    
+            let registro = 0; 
                 
+            let factura = Array.isArray(data) 
+                        ? data.reduce( (max, factura) => parseInt(factura.DocumentoNumero) > parseInt(max.DocumentoNumero) ? factura : max, data[0])
+                         : null;
+
                 let products = [];
                             
                 productsCart.map(product => {
@@ -635,7 +632,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
                     Fecha: dateNow(),
                     Aplicativo: "1hora",
                     Clientes: idCliente,
-                    Zona: zona_id !== '' ? zona_id.ID.toString() : "",
+                    Zona: factura !== null ? factura.Zona.ID.toString() : "",
                     Direccion: dataSend.Direccion,
                     Ciudad: dataSend.Ciudad,
                     Referencia: formWompi.reference,
