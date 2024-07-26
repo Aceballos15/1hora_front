@@ -42,7 +42,10 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
 
         if ( id.length === 0 ) {
             errorMessage = 'Campo vacío, ingresa tu documento';
-           
+        }
+
+        if(verifyContentNumbers(id)) {
+            errorMessage = "El campo no puede contener letras";
         }
 
         if ( tipo.length === 0 || tipo === 'Tipo') {
