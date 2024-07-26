@@ -36,9 +36,6 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
         let errorMessage = '';
 
         let load = document.querySelector('.load-send');
-        
-
-     
 
         if ( id.length === 0 ) {
             errorMessage = 'Campo vacío, ingresa tu documento';
