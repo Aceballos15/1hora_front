@@ -36,14 +36,16 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
         let errorMessage = '';
 
         let load = document.querySelector('.load-send');
+        
+        if(!verifyContentCharacters(id)) {
+            errorMessage = "El campo solo puede contener números";
+        }
 
         if ( id.length === 0 ) {
             errorMessage = 'Campo vacío, ingresa tu documento';
         }
 
-        if(verifyContentNumbers(id)) {
-            errorMessage = "El campo solo puede contener números";
-        }
+        
 
         if ( tipo.length === 0 || tipo === 'Tipo') {
             errorMessage = 'Campo vacío, ingresa el tipo de documento';
@@ -493,6 +495,11 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
     const verifyContentNumbers = (text) => {
 
         return /^[a-zA-Z\s]+$/.test(text);
+    }
+
+    const verifyContentCharacters = (text) => {
+
+        return /^[0-9]+$/.test(text);
     }
 
     const dateNow = () => {
