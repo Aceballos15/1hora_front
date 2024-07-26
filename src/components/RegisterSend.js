@@ -45,7 +45,7 @@ export const RegisterSend = ({discountPurchase, setDiscountPurchase, totalDiscou
         }
 
         if(verifyContentNumbers(id)) {
-            errorMessage = "El campo no puede contener letras";
+            errorMessage = "El campo solo puede contener números";
         }
 
         if ( tipo.length === 0 || tipo === 'Tipo') {
