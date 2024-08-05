@@ -568,16 +568,30 @@ img {
     color: var(--red);
     font-weight: bold;
     font-size: 1.2rem;
+    display: block;
 }
 
 .products__price-before {
     color: var(--dark-gray);
-    text-decoration: line-through;
+    text-decoration: line-through; 
     text-shadow: 3px 3px 6px var(--light-gray);
     font-style: italic;
     font-size: 0.94rem;
     display: block;
+    position: relative;
+    display: inline-block;
 }
+/* 
+.products__price-before::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 0.1rem;
+    background-color: var(--dark-gray);
+} */
 
 .products__discounts {
     position: absolute;
@@ -656,6 +670,10 @@ img {
     opacity: 0;
     width: 100%;
     transition: all 0.4 ease;
+}
+
+.products__options.prom {
+    bottom: 1.7rem;
 }
 
 .products__card-product:hover .products__options {

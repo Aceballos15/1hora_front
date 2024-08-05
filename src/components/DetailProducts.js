@@ -56,7 +56,17 @@ export const DetailProducts = ({discountPurchase ,setTotalDiscount, productsCart
                                 <div className="products__cont-price-cart">
                                     <div className="products__cont-price">
                                         {/* Cambiar para mas adelante el precio del producto */}
-                                        <span className="products__price">{productDetail && formatNumber(productDetail.Precio_Mayorista, true) } COP</span>
+                                        {productDetail.Promosion !== null && productDetail.Promosion === "Si" && productDetail.PrecioComparacion !== 0 && productDetail.PrecioComparacion !== null ? (
+                                            <>
+                                                <span className="products__price">{ formatNumber(productDetail.PrecioComparacion, true)} COP</span>
+                                                <span className="products__price-before">{formatNumber(productDetail.Precio_Mayorista, true)} COP</span>
+                                            </>
+                                        ): (
+                                            <span className="products__price">{formatNumber(productDetail.Precio_Mayorista, true)} COP</span>
+                                        )}
+
+                                        
+                                   
                                         {/* <span className="products__price-before">$79.900 COP</span> */}
                                     </div>
                                     
