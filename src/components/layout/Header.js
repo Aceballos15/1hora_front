@@ -68,7 +68,7 @@ useEffect( () => {
                 return 0;
               } );
 
-            console.log(order_products);
+      
 
             setProducts(await order_products);
             setListProducts(await order_products);
