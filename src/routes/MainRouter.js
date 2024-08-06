@@ -56,11 +56,22 @@ export const MainRouter = () => {
         getGroupProductsAPI();
 
         const getProductsAPI = async() => {
-            const products_api = await fetch(URL_BASE);
 
-            const products_data = await products_api.json();
-            
-            setProducts(await products_data.data);    
+            try {
+                const products_api = await fetch(URL_BASE);
+    
+                const products_data = await products_api.json();
+                
+                const order_products = products_data.data.sort( (a, b) => {
+                    if (a.Promosion === 'Si' && b.Promosion !== 'Si') return -1;
+                    if (a.Promosion !== 'Si' && b.Promosion === 'Si') return 1;
+                    return 0;
+                  } );
+                setProducts(await order_products);    
+                
+            } catch (error) {
+                console.log("Error al traer los productos - error: " + error);
+            }
         }
 
         getProductsAPI();
